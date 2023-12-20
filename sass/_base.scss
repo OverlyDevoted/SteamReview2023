@@ -1,0 +1,83 @@
+@use "variables";
+@use 'sass:color';
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    color: white;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 14px;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+}
+
+img {
+    height: 100%;
+}
+
+.flex {
+    display: flex;
+    gap: variables.$gapX-1;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.container {
+    width: variables.$g-width;
+    margin: 0 auto;
+}
+
+@mixin background_img($url: url("./../images/icons/gamepad-retro.svg")) {
+    background-image: $url;
+
+}
+
+//changing degrees won't work. scale does tho
+@mixin background_slide($scale: 8, $rotation: -45deg) {
+    background-repeat: repeat;
+
+    @if $rotation !=0deg {
+        transform: rotate($rotation);
+        background-size: calc((200px * sin(180deg + $rotation)) *$scale);
+    }
+
+    @else {
+        background-size: calc(200px);
+    }
+    
+    width: 200dvw;
+    height: 600dvh;
+}
+
+.background {
+    position: absolute;
+    background-color: rgb(49, 49, 49);
+    filter: invert(500%);
+    @include background_slide;
+
+    z-index: -1;
+    animation: pan 5000ms infinite linear;
+    @include background_img;
+}
+
+@keyframes pan {
+    0% {
+        translate: 0% 0%;
+    }
+
+    100% {
+        translate: -400px -400px;
+    }
+}

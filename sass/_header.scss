@@ -1,0 +1,11 @@
+@use "variables";
+header {
+    background: variables.$g-purp-blue;
+    position: relative;
+    overflow: hidden;
+    height: 300px;
+
+    img {
+        width: 130px;
+    }
+}
